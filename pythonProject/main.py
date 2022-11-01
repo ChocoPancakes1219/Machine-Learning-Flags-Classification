@@ -4,7 +4,7 @@ from sklearn.model_selection import KFold
 from sklearn.preprocessing import LabelEncoder
 from sklearn import svm
 
-data = pd.read_csv('../pythonProject/flag.csv')
+data = pd.read_csv('flag.csv')
 
 # Cleaning the data
 data = data.drop('name', axis=1)
@@ -15,7 +15,7 @@ data['botright'] = le.fit_transform(data['botright'])
 
 # Separating the data
 X = data.iloc[:, 0:-1].values
-y = data. iloc [:, 1].values
+y = data. iloc[:, 1].values
 
 # Data train, predict and evaluation
 
