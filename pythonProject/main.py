@@ -58,6 +58,7 @@ y = data['religion']
 X_train, X_test, y_train, y_test = sklearn.model_selection.train_test_split(X, y, test_size=0.6, random_state=42)
 
 # Support Vector Machine
+print('\nSupport Vector Machine')
 clf = svm.SVC(C=3.0, kernel='rbf', degree=5, gamma='auto')
 clf.fit(X_train, y_train)
 predictions = clf.predict(X_test)
@@ -68,6 +69,7 @@ cm = confusion_matrix(y_test, predictions)
 visualise(cm, clf, X, y, )
 
 # Multi Layer Perceptron
+print('\nMulti Layer Perceptron')
 mlp = MLPClassifier(hidden_layer_sizes=(6, 4), solver='lbfgs', random_state=42, max_iter=50000)
 mlp.fit(X_train, y_train)
 predictions = mlp.predict(X_test)
@@ -78,6 +80,7 @@ cm = confusion_matrix(y_test, predictions)
 visualise(cm, mlp, X, y, )
 
 # Linear Regression
+print('\nLinear Regression')
 reg = LinearRegression()
 reg.fit(X_train, y_train)
 predictions = reg.predict(X_test)
@@ -91,6 +94,7 @@ cm = confusion_matrix(y_test, predictions_classes)
 visualise(cm, reg, X, y, )
 
 # Decision Tree
+print('\nDecision Tree')
 dt = DecisionTreeClassifier(class_weight='balanced')
 dt.fit(X_train, y_train)
 predictions = dt.predict(X_test)
@@ -99,3 +103,5 @@ print(classification_report(y_test, predictions))
 # Evaluate
 cm = confusion_matrix(y_test, predictions)
 visualise(cm, dt, X, y)
+
+plt.show()
