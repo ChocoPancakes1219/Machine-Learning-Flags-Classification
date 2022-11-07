@@ -39,8 +39,8 @@ def plot(cm):
 
 def kf(ag, X, y):
     # K-fold cross validation
-    cv_error = np.average(cross_val_score(ag, X, y, cv=n_folds))
-    print('The {}-fold cross-validation accuracy score for this classifier is {:.2f}'.format(n_folds, cv_error))
+    scores = cross_val_score(ag, X, y, cv=n_folds)
+    print('The {}-fold cross-validation accuracy score for this classifier is {:.2f} '.format(n_folds, scores.mean()))
 
 
 data = pd.read_csv('flag.csv')
@@ -52,10 +52,10 @@ data['topleft'] = le.fit_transform(data['topleft'])
 data['botright'] = le.fit_transform(data['botright'])
 
 # Creating dummy data to classify string data
-X = data.drop('name', axis=1)
+X = data.drop(['name','religion'], axis=1)
 y = data['religion']
 
-X_train, X_test, y_train, y_test = sklearn.model_selection.train_test_split(X, y, test_size=0.6, random_state=42)
+X_train, X_test, y_train, y_test = sklearn.model_selection.train_test_split(X, y, test_size=0.2, random_state=42)
 
 # Support Vector Machine
 print('\nSupport Vector Machine')
