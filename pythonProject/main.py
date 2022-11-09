@@ -6,7 +6,7 @@ from sklearn.neural_network import MLPClassifier
 from sklearn.preprocessing import LabelEncoder
 from sklearn.model_selection import cross_val_score
 from sklearn import svm
-from sklearn.linear_model import LinearRegression
+from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import classification_report
 from sklearn.metrics import confusion_matrix
 from sklearn.tree import DecisionTreeClassifier
@@ -65,7 +65,7 @@ predictions = clf.predict(X_test)
 print(classification_report(y_test, predictions))
 # Evaluate
 cm = confusion_matrix(y_test, predictions)
-visualise(cm, clf, X, y)
+visualise(cm, clf, X_train, y_train)
 
 # Multi Layer Perceptron
 print('\n\nMulti Layer Perceptron')
@@ -78,15 +78,13 @@ print(classification_report(y_test, predictions))
 cm = confusion_matrix(y_test, predictions)
 visualise(cm, mlp, X, y)
 
-# Linear Regression
-print('\n\nLinear Regression')
-reg = LinearRegression()
+# Logistic Regression
+print('\n\nLogistic Regression')
+reg = LogisticRegression()
 reg.fit(X_train, y_train)
 predictions = reg.predict(X_test)
 # Classification Report
-cutoff = 0.9
-predictions_classes = np.zeros_like(predictions)
-predictions_classes[predictions > cutoff] = 1
+predictions_classes = np.rint(predictions)
 print(classification_report(y_test, predictions_classes))
 # Evaluate
 cm = confusion_matrix(y_test, predictions_classes)
